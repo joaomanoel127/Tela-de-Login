@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Tela de Login</title>
+</head>
+<body>
+    <main class="container">
+        <form>
+            <h1>Tela Login</h1>
+            <div class="input-box">
+                <input type="email" placeholder="Usuário">
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Senha">
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox"> Lembrar senha
+                </label>
+                <a href="#">Esqueceu a senha?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="register-link">
+                <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+            </div>
+        </form>
+    </main>
+
+ <script>
+document.querySelector("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.querySelector("input[type=email]").value;
+  const senha = document.querySelector("input[type=password]").value;
+
+  try {
+    const res = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, senha })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert("Login feito com sucesso!");
+      localStorage.setItem("token", data.token);
+      // redirecionar para outra página protegida
+    } else {
+      alert(data.erro || "Erro no login");
+    }
+  } catch (err) {
+    alert("Erro ao conectar ao servidor");
+  }
+});
+</script>
+
+
+
+</body>
+</html>
