@@ -5,6 +5,7 @@ const authController = require("../controllers/authController");
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
 module.exports = router;
 const authMiddleware = require("../middlewares/authMiddleware");
 

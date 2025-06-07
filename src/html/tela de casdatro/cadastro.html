@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="cadastro.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+</head>
+<body>
+
+<div class='container'>
+  <div class='card'>
+    <h1> Cadastrar </h1>
+    
+    <div id='msgError'></div>
+    <div id='msgSuccess'></div>
+
+    <!-- Campo Email -->
+    <div class="label-float">
+      <input type="text" id="email" placeholder=" " required>
+      <label id="labelEmail" for="email">Email</label>
+    </div>
+    
+    <!-- Campo Senha -->
+    <div class="label-float">
+      <input type="password" id="senha" placeholder=" " required>
+      <label id="labelSenha" for="senha">Senha</label>
+      <i id="verSenha" class="fa fa-eye" aria-hidden="true"></i>
+    </div>
+
+    <!-- Campo Confirmar Senha -->
+    <div class="label-float">
+      <input type="password" id="confirmSenha" placeholder=" " required>
+      <label id="labelConfirmSenha" for="confirmSenha">Confirmar Senha</label>
+      <i id="verConfirmSenha" class="fa fa-eye" aria-hidden="true"></i>
+    </div>
+    
+    <!-- Botão -->
+    <div class='justify-center'>
+      <button onclick='cadastrar()'>Cadastrar</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="cadastro.js"></script>
+</body>
+</html>

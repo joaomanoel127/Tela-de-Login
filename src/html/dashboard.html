@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área Protegida</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #e50914;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bem-vindo à Área Protegida! 🔐</h1>
+  <p id="mensagem"></p>
+  <button onclick="logout()">Sair</button>
+
+  <script>
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Você precisa estar logado!");
+      window.location.href = "index.html";
+    } else {
+      fetch("http://localhost:3000/auth/protegido", {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.erro) {
+          alert("Acesso negado!");
+          localStorage.removeItem("token");
+          window.location.href = "index.html";
+        } else {
+          document.getElementById("mensagem").innerText = data.msg || "Você está autenticado!";
+        }
+      })
+      .catch(() => {
+        alert("Erro ao validar token.");
+        window.location.href = "index.html";
+      });
+    }
+
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
